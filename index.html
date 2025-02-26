@@ -73,9 +73,11 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        function Card({ value, suit, pick, onClick }) {
+        function Card({ value, suit, isPicked, onClick }) {
             return (
-                <div className={`card ${suit === "♥" || suit === "♦" ? "heart" : "spade"}`}>
+                <div className={`card ${suit === "♥" || suit === "♦" ? "heart" : "spade"}`}
+                    style={{ border: isPicked ? "3px solid blue" : "1px solid black" }}
+                    onClick={onClick}>
                     <div>{value}</div>
                     <div>{suit}</div>
                 </div>
@@ -123,26 +125,28 @@
             function resetButton() {
                 setDeck(createDeckOfCard());
                 setDrawnCards([]);
+                setPicked(null);
             }
 
             function pickedCard(card) {
                 if(picked === null) {
-                    if(picked === card) {
+                    setPicked(card);
+                } else{
+                    if(picked.suit === card.suit && picked.value === card.value) {
                         setPicked(null);
                     } else {
-                        const newDrawnCards = drawnCards.map(c => (c === picked ? card : c === card ? picked : c));
+                        const newDrawnCards = drawnCards.map(c => (c.suit === picked.suit && c.value === picked.value) ? card :
+                        (c.suit === card.suit && c.value === card.value) ? picked : c);
                         setDrawnCards(newDrawnCards);
-                        setPickedCard(null);
+                        setPicked(null);
                     }
                 }
-                 else {
-                    setPicked(card);
-                }
+                 
             }
 
             function tossCard() {
                 if(!picked) return;
-                setDrawnCards(drawnCards.filter((card) => card !== picked));
+                setDrawnCards(drawnCards.filter((card) => !(card.suit === picked.suit && card.value === picked.value)));
                 setPicked(null);
             }
 
@@ -155,7 +159,7 @@
                     </div>
                     <div className="cards-container">
                         {drawnCards.map((card, index) => (
-                            <Card key={index} value={card.value} suit={card.suit} pick={picked === card} onClick={() => pickedCard(card)}/>
+                            <Card key={index} value={card.value} suit={card.suit} isPicked={picked === card} onClick={() => pickedCard(card)}/>
                         ))}
                     </div> 
                     <div className="button">
