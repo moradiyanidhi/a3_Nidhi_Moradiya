@@ -123,7 +123,7 @@
                 setDeck(createDeckOfCard());
                 setDrawnCards([]);
             }
-            
+
             return(
                 <div>
                     
@@ -139,6 +139,7 @@
                     <div className="button">
                         <button onClick={() => dealCardButtons(5)} disabled={deck.length < 5}> Deal 5 </button>
                         <button onClick={() => dealCardButtons(7)} disabled={deck.length < 7}> Deal 7 </button>
+                        <button onClick={resetButton}>Reset</button>
                     </div>
                 </div>
             );
