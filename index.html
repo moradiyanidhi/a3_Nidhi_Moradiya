@@ -73,7 +73,7 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        function Card({ value, suit }) {
+        function Card({ value, suit, pick, onClick }) {
             return (
                 <div className={`card ${suit === "♥" || suit === "♦" ? "heart" : "spade"}`}>
                     <div>{value}</div>
@@ -155,13 +155,14 @@
                     </div>
                     <div className="cards-container">
                         {drawnCards.map((card, index) => (
-                            <Card key={index} value={card.value} suit={card.suit} />
+                            <Card key={index} value={card.value} suit={card.suit} pick={picked === card} onClick={() => pickedCard(card)}/>
                         ))}
                     </div> 
                     <div className="button">
                         <button onClick={() => dealCardButtons(5)} disabled={deck.length < 5}> Deal 5 </button>
                         <button onClick={() => dealCardButtons(7)} disabled={deck.length < 7}> Deal 7 </button>
                         <button onClick={resetButton}>Reset</button>
+                        <button onClick={tossCard} disabled={!picked}>Toss</button>
                     </div>
                 </div>
             );
