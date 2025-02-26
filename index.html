@@ -98,6 +98,7 @@
             
             const [deck, setDeck] = React.useState(createDeckOfCard());
             const [drawnCards, setDrawnCards] = React.useState([]);
+            const [picked, setPicked] = React.useState(null);
 
             function drawRandomCard() {
                 if(deck.length === 0) return;
@@ -122,6 +123,27 @@
             function resetButton() {
                 setDeck(createDeckOfCard());
                 setDrawnCards([]);
+            }
+
+            function pickedCard(card) {
+                if(picked === null) {
+                    if(picked === card) {
+                        setPicked(null);
+                    } else {
+                        const newDrawnCards = drawnCards.map(c => (c === picked ? card : c === card ? picked : c));
+                        setDrawnCards(newDrawnCards);
+                        setPickedCard(null);
+                    }
+                }
+                 else {
+                    setPicked(card);
+                }
+            }
+
+            function tossCard() {
+                if(!picked) return;
+                setDrawnCards(drawnCards.filter((card) => card !== picked));
+                setPicked(null);
             }
 
             return(
