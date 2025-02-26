@@ -150,6 +150,10 @@
                 setPicked(null);
             }
 
+            function shuffleCards() {
+                setDrawnCards(shuffleArray([...drawnCards]));
+            }
+
             return(
                 <div>
                     
