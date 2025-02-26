@@ -88,12 +88,21 @@
                 setDrawnCards([...drawnCards, card]);
                 setDeck(deck.filter((_, index) => index !== randomIndex));
             }
+
+            function dealCardBusttoms() {
+                if(deck.length < number) return;
+
+                setDeck(createDeckOfCard());
+                let shuffleDeckCards = [...createDeckOfCard()].sort(() => Math.random() - 0.5);
+                let newCards = shuffleDeckCards.slice(0,number);
+
+                setDrawnCards(newCards);
+                setDeck(shuffleDeckCards.slice(number));
+            }
             return(
                 <div>
-                    <div 
-                        className="deck" 
-                        onClick={deck.length > 0 ? drawRandomCard : null}
-                    >
+                   
+                    <div className="deck" onClick={deck.length > 0 ? drawRandomCard : null}>
                         {deck.length > 0 ? "Draw a Card" : "No Cards Remaining"}
                     </div>
                     <div className="cards-container">
