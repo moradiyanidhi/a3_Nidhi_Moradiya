@@ -89,7 +89,7 @@
                 setDeck(deck.filter((_, index) => index !== randomIndex));
             }
 
-            function dealCardBusttoms() {
+            function dealCardButtons(number) {
                 if(deck.length < number) return;
 
                 setDeck(createDeckOfCard());
@@ -101,6 +101,7 @@
             }
             return(
                 <div>
+                    
                    
                     <div className="deck" onClick={deck.length > 0 ? drawRandomCard : null}>
                         {deck.length > 0 ? "Draw a Card" : "No Cards Remaining"}
@@ -110,6 +111,10 @@
                             <Card key={index} value={card.value} suit={card.suit} />
                         ))}
                     </div> 
+                    <div className="button">
+                        <button onClick={() => dealCardButtons(5)} disabled={deck.length < 5}> Deal 5 </button>
+                        <button onClick={() => dealCardButtons(7)} disabled={deck.length < 7}> Deal 7 </button>
+                    </div>
                 </div>
             );
 
