@@ -171,6 +171,7 @@
                         <button onClick={() => dealCardButtons(7)} disabled={deck.length < 7}> Deal 7 </button>
                         <button onClick={resetButton}>Reset</button>
                         <button onClick={tossCard} disabled={!picked}>Toss</button>
+                        <button onClick={shuffleCards} disabled={drawnCards.length === 0}>Regroup</button>
                     </div>
                 </div>
             );
