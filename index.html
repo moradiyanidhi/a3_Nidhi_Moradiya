@@ -118,6 +118,12 @@
                 setDrawnCards(newCards);
                 setDeck(shuffleDeckCards.slice(number));
             }
+
+            function resetButton() {
+                setDeck(createDeckOfCard());
+                setDrawnCards([]);
+            }
+            
             return(
                 <div>
                     
