@@ -130,11 +130,11 @@
 
             function drawRandomCard() {
                 if(deck.length === 0) return;
-                const randomIndex = Math.floor(Math.random() * deck.length);
-                const card = deck[randomIndex];
+                const random = Math.floor(Math.random() * deck.length);
+                const card = deck[random];
 
                 setDrawnCards([...drawnCards, card]);
-                setDeck(deck.filter((_, index) => index !== randomIndex));
+                setDeck(deck.filter((_, position) => position !== random));
             }
 
             function dealCardButtons(number) {
